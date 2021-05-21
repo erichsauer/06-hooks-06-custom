@@ -1,37 +1,34 @@
 import React from 'react';
-import useAvatarCharacters from '../../hooks/avatarCharacters';
 
-const Controls = () => {
-  const {
-    currentPage,
-    perPage,
-    affiliation,
-    totalCharacters,
-    handleAffiliationChange,
-    handlePageChange,
-    handlePerPage,
-  } = useAvatarCharacters();
-
+const Controls = ({
+  currentPage,
+  perPage,
+  totalCharacters,
+  affiliation,
+  onPerPage,
+  onPageChange,
+  onAffiliationChange,
+}) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <button onClick={() => handlePageChange(-1)} disabled={currentPage <= 1}>
+      <button onClick={() => onPageChange(-1)} disabled={currentPage <= 1}>
         👈🏼
       </button>
-      <select name="results per page" onChange={handlePerPage} value={perPage}>
+      <select name="results per page" onChange={onPerPage} value={perPage}>
         <option value="10">10</option>
         <option value="25">25</option>
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
       <button
-        onClick={() => handlePageChange(1)}
+        onClick={() => onPageChange(1)}
         disabled={currentPage >= totalCharacters / perPage}
       >
         👉🏼
       </button>
       <select
         name="affiliations"
-        onChange={handleAffiliationChange}
+        onChange={onAffiliationChange}
         value={affiliation}
       >
         <option value="All">All</option>

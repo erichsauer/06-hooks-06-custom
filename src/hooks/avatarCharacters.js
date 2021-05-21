@@ -35,7 +35,7 @@ const useAvatarCharacters = () => {
     setPerPage(value);
     setCurrentPage(1);
   };
-
+  console.log(characters);
   return {
     loading,
     characters,
