@@ -11,10 +11,18 @@ const Controls = ({
 }) => {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <button onClick={() => onPageChange(-1)} disabled={currentPage <= 1}>
+      <button
+        onClick={() => onPageChange(-1)}
+        disabled={currentPage <= 1}
+        aria-label="next page"
+      >
         👈🏼
       </button>
-      <select name="results per page" onChange={onPerPage} value={perPage}>
+      <select
+        aria-label="results per page"
+        onChange={onPerPage}
+        value={perPage}
+      >
         <option value="10">10</option>
         <option value="25">25</option>
         <option value="50">50</option>
@@ -23,11 +31,12 @@ const Controls = ({
       <button
         onClick={() => onPageChange(1)}
         disabled={currentPage >= totalCharacters / perPage}
+        aria-label="previous page"
       >
         👉🏼
       </button>
       <select
-        name="affiliations"
+        aria-label="affiliation"
         onChange={onAffiliationChange}
         value={affiliation}
       >
