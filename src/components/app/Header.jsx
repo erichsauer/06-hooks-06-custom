@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
-  return <div>header</div>;
-}
-
-Header.propTypes = {};
+const Header = () => (
+  <header>
+    <Link to="/">Home</Link>
+  </header>
+);
 
 export default Header;

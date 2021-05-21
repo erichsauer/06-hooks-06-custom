@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import useAvatarCharacters from '../../hooks/avatarCharacters';
 import Character from './Character';
 
-function CharacterList(props) {
-  return <Character />;
-}
+const CharacterList = () => {
+  const { loading, characters } = useAvatarCharacters();
 
-CharacterList.propTypes = {};
+  if (loading) return <div>Loading...</div>;
+  return (
+    <ul>
+      {characters.map((character) => (
+        <li key={character.id}>
+          <Character {...character} />
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default CharacterList;
