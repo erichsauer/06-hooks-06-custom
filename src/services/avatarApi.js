@@ -1,11 +1,17 @@
 const URL = 'https://last-airbender-api.herokuapp.com/api/v1/characters';
+let TOTAL;
+let characters;
 
-// current total avatar characters - it's not supplied by the API so may need to be updated!
-const TOTAL = 497;
+// fetches total characters within an affiliation in order to determine total characters for pagination
+const setTotal = async (url) => {
+  const totalRes = await fetch(url);
+  const totalJson = await totalRes.json();
+  return totalJson.length;
+};
 
 const fetchFromApi = async ({ id, perPage, currentPage, affiliation }) => {
-  let characters;
   if (id) {
+    TOTAL = await setTotal(`${URL}?perPage=1000`);
     const res = await fetch(`${URL}/${id}`);
     const { _id, name, gender, eye, hair, weapon, photoUrl } = await res.json();
     return {
@@ -14,11 +20,13 @@ const fetchFromApi = async ({ id, perPage, currentPage, affiliation }) => {
     };
   }
   if (affiliation !== 'All') {
+    TOTAL = await setTotal(`${URL}?affiliation=${affiliation}&perPage=1000`);
     const res = await fetch(
       `${URL}?affiliation=${affiliation}&perPage=${perPage}&page=${currentPage}`
     );
     characters = await res.json();
   } else {
+    TOTAL = await setTotal(`${URL}?perPage=1000`);
     const res = await fetch(`${URL}?perPage=${perPage}&page=${currentPage}`);
     characters = await res.json();
   }

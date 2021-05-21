@@ -25,6 +25,7 @@ const useAvatarCharacters = () => {
 
   const handleAffiliationChange = ({ target: { value } }) => {
     setAffiliation(value);
+    setCurrentPage(1);
   };
 
   const handlePageChange = (n) => {
